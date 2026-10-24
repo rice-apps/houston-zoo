@@ -1,0 +1,157 @@
+:root {
+  --color-bg: #f7f7f8;
+  --color-surface: #ffffff;
+  --color-text: #1d1d1f;
+  --color-muted: #6e6e73;
+  --color-border: #e2e2e6;
+  --color-primary: #2563eb;
+  --color-danger: #dc2626;
+  --color-success: #16a34a;
+  --radius: 8px;
+
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font: inherit;
+}
+
+.muted {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+/* Layout */
+.layout__header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.layout__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+}
+
+.layout__brand {
+  font-weight: 700;
+}
+
+.layout__nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.layout__nav a {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.layout__nav a.active {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.layout__main {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Button */
+.button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  font: inherit;
+  color: #fff;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button--primary {
+  background: var(--color-primary);
+}
+
+.button--danger {
+  background: var(--color-danger);
+}
+
+/* ErrorMessage */
+.error-message {
+  color: var(--color-danger);
+}
+
+/* Feature: health */
+.health::before {
+  content: '';
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-muted);
+}
+
+.health--up::before {
+  background: var(--color-success);
+}
+
+.health--down::before {
+  background: var(--color-danger);
+}
+
+/* Feature: items */
+.items__form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.items__form input {
+  flex: 1 1 12rem;
+}
+
+.items__list {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.items__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
