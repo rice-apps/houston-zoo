@@ -88,3 +88,4 @@ Suppose your Notion task is **`ZOO-12 — Implement animal search`**:
 - Do **not** merge a PR until its task is ready to be marked Completed.
 - Our current automation assumes **one final PR per Notion task**. If a task needs multiple PRs, coordinate with the team lead so it isn't marked Completed too early.
 - If a status doesn't update, check the repository's **Actions** tab and confirm that your branch includes a valid Notion ID.
+
