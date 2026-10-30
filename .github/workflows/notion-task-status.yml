@@ -1,0 +1,37 @@
+name: Sync GitHub task status to Notion
+
+on:
+  create:
+  pull_request_target:
+    types: [opened, reopened, ready_for_review, closed]
+
+permissions:
+  contents: read
+
+jobs:
+  sync-notion:
+    # Only track created branches and PRs from branches in this repository.
+    # This also prevents fork PRs from using the Notion credential.
+    if: >-
+      (github.event_name == 'create' && github.event.ref_type == 'branch') ||
+      (github.event_name == 'pull_request_target' &&
+       github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    steps:
+      # With pull_request_target, checkout defaults to trusted base-branch code.
+      # NEVER check out untrusted PR head code in this job.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Update Notion task status
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ vars.NOTION_DATABASE_ID }}
+          NOTION_TASK_PREFIX: ZOO
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          BRANCH_NAME: ${{ github.event_name == 'create' && github.event.ref || github.event.pull_request.head.ref }}
+          PR_ACTION: ${{ github.event.action }}
+          PR_MERGED: ${{ github.event.pull_request.merged }}
+          PR_DRAFT: ${{ github.event.pull_request.draft }}
+        run: python scripts/notion_task_status.py
